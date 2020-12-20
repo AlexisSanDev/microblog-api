@@ -4,7 +4,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
-require('dotenv').config();
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
@@ -14,6 +13,12 @@ var usersRouter = require('./routes/users');
 var postsRouter = require('./routes/posts');
 
 var app = express();
+
+if(process.env.NODE_ENV !== 'production'){
+  require('dotenv').config();
+}
+const DB_URI=process.env.DB_URI;
+const PORT = process.env.PORT;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
